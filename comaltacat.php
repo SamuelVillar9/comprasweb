@@ -43,7 +43,7 @@ if (!isset($_POST) || empty($_POST)) {
     $nombre=limpiar_campo($_POST['nombre']);
 
     //INSERTAMOS EN TABLA CATEGORIA
-    $sql = "INSERT INTO categoria (ID_CATEGORIA, NOMBRE) VALUES ('$idcategoria', '$nombre')";
+    $sql = "INSERT INTO CATEGORIA (ID_CATEGORIA, NOMBRE) VALUES ('$idcategoria', '$nombre')";
 
     // COMPROBAR CONEXION
     if (mysqli_query($db, $sql)) {
