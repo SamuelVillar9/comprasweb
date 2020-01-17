@@ -57,11 +57,11 @@ if (!isset($_POST) || empty($_POST)) {
     $precio=limpiar_campo($_POST['precio']);
 
     $idcategoria=$_POST['categoria'];
-	$sql = "SELECT ID_CATEGORIA FROM categoria WHERE NOMBRE= '$idcategoria' ";
+	$sql = "SELECT ID_CATEGORIA FROM CATEGORIA WHERE NOMBRE= '$idcategoria' ";
 	$resultado=mysqli_query($db, $sql);//el resultado no es valido, hay que tratarlo
     $row=mysqli_fetch_assoc($resultado);    
     $id=$row['ID_CATEGORIA'];
-	$sql = "INSERT INTO producto (ID_PRODUCTO, NOMBRE, PRECIO, ID_CATEGORIA) VALUES ('$idproducto', '$nombre', '$precio', '$id')";
+	$sql = "INSERT INTO PRODUCTO (ID_PRODUCTO, NOMBRE, PRECIO, ID_CATEGORIA) VALUES ('$idproducto', '$nombre', '$precio', '$id')";
 
     // COMPROBAR CONEXION
     if (mysqli_query($db, $sql)) {
@@ -91,7 +91,7 @@ function limpiar_campo($campoformulario) {
 function obtenerCategoria($db) {
 	$categoria = array();
 	
-	$sql = "SELECT NOMBRE FROM categoria";
+	$sql = "SELECT NOMBRE FROM CATEGORIA";
 	
 	$resultado = mysqli_query($db, $sql);
 	if ($resultado) {
