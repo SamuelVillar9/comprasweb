@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h1>ALTA PRODUCTOS - Nombre del alumno</h1>
+<h1>ALTA PRODUCTOS - Samuel Villar</h1>
 <?php
 include "conexion.php";
 
