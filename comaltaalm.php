@@ -8,14 +8,12 @@
 </head>
 
 <body>
-<h1>ALTA CATEGORÍAS - Samuel Villar</h1>
+<h1>ALTA ALMACEN - Samuel Villar</h1>
 <?php
 include "session.php";
 
 /* Se muestra el formulario la primera vez */
 if (!isset($_POST) || empty($_POST)) { 
-
-	
 	
     /* Se inicializa la lista valores*/
 	echo '<form action="" method="post">';
@@ -23,30 +21,37 @@ if (!isset($_POST) || empty($_POST)) {
 <div class="container ">
 <!--Aplicacion-->
 <div class="card border-success mb-3" style="max-width: 30rem;">
-<div class="card-header">Datos Categoría</div>
+<div class="card-header">Datos Almacen</div>
 <div class="card-body">
 		<div class="form-group">
-        ID CATEGORIA <input type="text" name="idcategoria" placeholder="idcategoria" class="form-control">
+        LOCALIDAD ALMACEN <input type="text" name="localidad" placeholder="Localidad" class="form-control">
         </div>
-		<div class="form-group">
-        NOMBRE CATEGORIA <input type="text" name="nombre" placeholder="nombre" class="form-control">
-        </div>
-
 		<BR>
 <?php
-	echo '<div><input type="submit" value="Dar de Alta Categoria"></div>
+	echo '<div><input type="submit" value="Dar de Almacen"></div>
 	</form>';
 } else { 
 
-    $idcategoria=limpiar_campo($_POST['idcategoria']);
-    $nombre=limpiar_campo($_POST['nombre']);
+    $localidad=limpiar_campo($_POST['localidad']);
 
-    //INSERTAMOS EN TABLA CATEGORIA
-    $sql = "INSERT INTO categoria (ID_CATEGORIA, NOMBRE) VALUES ('$idcategoria', '$nombre')";
+	$select="SELECT max(NUM_ALMACEN) as codFinal from ALMACEN";
+    $resultado=mysqli_query($db, $select);//el resultado no es valido, hay que tratarlo
+	$row=mysqli_fetch_assoc($resultado);
+	$codFinal=$row['codFinal'];
+
+	if($codFinal==NULL){
+		$codFinal=10;
+	}
+	else{
+		$codFinal=$codFinal+10;
+	}
+	
+  //INSERTAMOS EN TABLA CATEGORIA
+    $sql = "INSERT INTO ALMACEN (NUM_ALMACEN, LOCALIDAD) VALUES ('$codFinal', '$localidad')";
 
     // COMPROBAR CONEXION
     if (mysqli_query($db, $sql)) {
-        echo "Datos de la categoria introducidos correctamente ";
+        echo "Datos del almacen introducidos correctamente";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($db);
     }
@@ -65,12 +70,6 @@ function limpiar_campo($campoformulario) {
   
     return $campoformulario;  
 }
-
-
-	
-
-
-
 
 ?>
 

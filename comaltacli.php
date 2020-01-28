@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h1>ALTA CATEGORÍAS - Samuel Villar</h1>
+<h1>ALTA CLIENTE - Samuel Villar</h1>
 <?php
 include "session.php";
 
@@ -23,30 +23,46 @@ if (!isset($_POST) || empty($_POST)) {
 <div class="container ">
 <!--Aplicacion-->
 <div class="card border-success mb-3" style="max-width: 30rem;">
-<div class="card-header">Datos Categoría</div>
+<div class="card-header">Datos Cliente</div>
 <div class="card-body">
 		<div class="form-group">
-        ID CATEGORIA <input type="text" name="idcategoria" placeholder="idcategoria" class="form-control">
+        NIF <input type="text" name="nif" placeholder="NIF" class="form-control" required maxlength="9" minlength="9">
         </div>
 		<div class="form-group">
-        NOMBRE CATEGORIA <input type="text" name="nombre" placeholder="nombre" class="form-control">
+        NOMBRE <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+        </div>
+		<div class="form-group">
+        APELLIDO <input type="text" name="apellido" placeholder="Apellido" class="form-control">
+        </div>
+		<div class="form-group">
+        CODIGO POSTAL <input type="text" name="cp" placeholder="Codigo Postal" class="form-control">
+        </div>
+		<div class="form-group">
+        DIRECCION <input type="text" name="direccion" placeholder="Direccion" class="form-control">
+        </div>
+		<div class="form-group">
+        CIUDAD <input type="text" name="ciudad" placeholder="Ciudad" class="form-control">
         </div>
 
 		<BR>
 <?php
-	echo '<div><input type="submit" value="Dar de Alta Categoria"></div>
+	echo '<div><input type="submit" value="Dar de Alta Cliente"></div>
 	</form>';
 } else { 
 
-    $idcategoria=limpiar_campo($_POST['idcategoria']);
+    $nif=limpiar_campo($_POST['nif']);
     $nombre=limpiar_campo($_POST['nombre']);
+	$apellido=limpiar_campo($_POST['apellido']);
+    $cp=limpiar_campo($_POST['cp']);
+	$direccion=limpiar_campo($_POST['direccion']);
+    $ciudad=limpiar_campo($_POST['ciudad']);
 
     //INSERTAMOS EN TABLA CATEGORIA
-    $sql = "INSERT INTO categoria (ID_CATEGORIA, NOMBRE) VALUES ('$idcategoria', '$nombre')";
+    $sql = "INSERT INTO CLIENTE (NIF, NOMBRE, APELLIDO, CP, DIRECCION, CIUDAD) VALUES ('$nif', '$nombre', '$apellido', '$cp', '$direccion', '$ciudad')";
 
     // COMPROBAR CONEXION
     if (mysqli_query($db, $sql)) {
-        echo "Datos de la categoria introducidos correctamente ";
+        echo "Datos del cliente introducidos correctamente";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($db);
     }
@@ -65,12 +81,6 @@ function limpiar_campo($campoformulario) {
   
     return $campoformulario;  
 }
-
-
-	
-
-
-
 
 ?>
 

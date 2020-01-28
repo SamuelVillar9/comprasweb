@@ -10,8 +10,7 @@
 <body>
 <h1>ALTA PRODUCTOS - Samuel Villar</h1>
 <?php
-include "conexion.php";
-
+include "session.php";
 
 /* Se muestra el formulario la primera vez */
 if (!isset($_POST) || empty($_POST)) { 
@@ -47,7 +46,7 @@ if (!isset($_POST) || empty($_POST)) {
 	</div>
 	<BR>
 <?php
-	echo '<div><input type="submit" value="Alta Producto"></div>
+	echo '<div><input type="submit" value="Dar de Alta Producto"></div>
 	</form>';
 } else { 
 
@@ -57,23 +56,21 @@ if (!isset($_POST) || empty($_POST)) {
     $precio=limpiar_campo($_POST['precio']);
 
     $idcategoria=$_POST['categoria'];
-	$sql = "SELECT ID_CATEGORIA FROM CATEGORIA WHERE NOMBRE= '$idcategoria' ";
+	$sql = "SELECT ID_CATEGORIA FROM categoria WHERE NOMBRE= '$idcategoria' ";
 	$resultado=mysqli_query($db, $sql);//el resultado no es valido, hay que tratarlo
     $row=mysqli_fetch_assoc($resultado);    
     $id=$row['ID_CATEGORIA'];
-	$sql = "INSERT INTO PRODUCTO (ID_PRODUCTO, NOMBRE, PRECIO, ID_CATEGORIA) VALUES ('$idproducto', '$nombre', '$precio', '$id')";
+	$sql = "INSERT INTO producto (ID_PRODUCTO, NOMBRE, PRECIO, ID_CATEGORIA) VALUES ('$idproducto', '$nombre', '$precio', '$id')";
 
     // COMPROBAR CONEXION
     if (mysqli_query($db, $sql)) {
-        echo "Datos introducidos correctamente en tabla empleado<br>";
+        echo "Datos del producto introducidos correctamente<br>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($db);
     }
 
     //CERRAMOS CONEXION CON LA BASE DE DATOS
     mysqli_close($db);
-
-        
 
 }
 ?>
@@ -91,7 +88,7 @@ function limpiar_campo($campoformulario) {
 function obtenerCategoria($db) {
 	$categoria = array();
 	
-	$sql = "SELECT NOMBRE FROM CATEGORIA";
+	$sql = "SELECT NOMBRE FROM categoria";
 	
 	$resultado = mysqli_query($db, $sql);
 	if ($resultado) {
@@ -108,7 +105,7 @@ function obtenerCategoria($db) {
 
 ?>
 
-
+<h2><a href = "index.php">Volver</a></h2>
 
 </body>
 
