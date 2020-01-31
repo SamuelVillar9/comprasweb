@@ -44,6 +44,8 @@ if (!isset($_POST) || empty($_POST)) {
 <?php
 	echo '<div><input type="submit" value="CONSULTAR COMPRAS"></div>
 	</form>';
+	
+	echo "<h2><a href = 'index2.php'>Volver</a></h2>";
 } else { 
 
    $fechaDesde=strtotime($_POST['fechaDesde']);
@@ -110,6 +112,7 @@ function listar($db, $nifCliente, $fechaDesde, $fechaHasta){
 		}
 		echo "<br>Total de compras del cliente: ".$totalCompras;	
 	}	
+	
 
 }
 

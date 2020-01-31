@@ -15,7 +15,7 @@ include "session.php";
 /* Se muestra el formulario la primera vez */
 if (!isset($_POST) || empty($_POST)) { 
 
-    //obtenemos la categoria
+    //obtenemos los datos con funciones
 	$productos=obtenerProducto($db);
 	$almacenes=obtenerAlmacen($db);
 	$dni=obtenerDni($db);
